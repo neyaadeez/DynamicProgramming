@@ -49,6 +49,7 @@ public class Lcs {
         String str1 = sc.next();
         System.out.println("Enter String 2: ");
         String str2 = sc.next();
+        sc.close();
         switch(x){
             case 1:
                 System.out.println("Naive Approach Answer: "+lcs.naiveApproach(str1, str2));
