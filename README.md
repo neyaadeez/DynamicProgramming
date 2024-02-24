@@ -7,7 +7,9 @@ Welcome to the Dynamic Programming (DP) repository! Here you'll find a collectio
 Each problem in this repository is accompanied by resources and a suggested approach to tackling it. To explore these resources and approaches, click on the links provided below:
 
 - [Longest Common Subsequence](https://github.com/neyaadeez/DynamicProgramming/tree/main/LCS):
-  - Description of problem 1 and approach.
+  - References:
+    - [Reading](https://www.techiedelight.com/longest-common-subsequence/)
+    - [Video](https://www.youtube.com/watch?v=sSno9rV8Rhg)
 
 Feel free to explore each problem, understand the concepts, and delve into the solutions provided.
 
