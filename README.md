@@ -10,6 +10,10 @@ Each problem in this repository is accompanied by resources and a suggested appr
   - References:
     - [Reading](https://www.techiedelight.com/longest-common-subsequence/)
     - [Video](https://www.youtube.com/watch?v=sSno9rV8Rhg)
+- [Shortest Common Supersequence](https://github.com/neyaadeez/DynamicProgramming/tree/main/SCS):
+  - References:
+    - [Reading](https://www.techiedelight.com/shortest-common-supersequence-introduction-scs-length/)
+    - [Video](https://www.youtube.com/watch?v=823Grn4_dCQ)
 
 Feel free to explore each problem, understand the concepts, and delve into the solutions provided.
 
@@ -18,6 +22,7 @@ Feel free to explore each problem, understand the concepts, and delve into the s
 Below is the list of DP problems included in this repository:
 
 - [Longest Common Subsequence](https://github.com/neyaadeez/DynamicProgramming/tree/main/LCS)
+- [Shortest Common Supersequence](https://github.com/neyaadeez/DynamicProgramming/tree/main/SCS)
 
 Each problem presents a unique challenge and provides an opportunity to enhance your understanding of dynamic programming.
 
