@@ -50,3 +50,39 @@ The shortest common supersequence (SCS) of two sequences is the shortest sequenc
 
 3. **Find the shortest supersequence**:
    Among all the supersequences that contain both sequences, we need to find the one with the minimum length. We initialize a variable to keep track of the minimum length found so far and another variable to store the corresponding shortest supersequence. As we generate and check each supersequence, if it meets the condition of containing both input sequences and its length is less than the current minimum length, we update the minimum length and the shortest supersequence accordingly.
+
+## Approach 2: Bottom-Up Dynamic Programming
+
+The problem is to find the shortest common supersequence (SCS) of two given sequences. A supersequence of two sequences is a sequence that contains both sequences as subsequences and is as short as possible.
+
+### Steps:
+1. **Define the subproblem**: 
+   - Let's define dp[i][j] as the length of the shortest common supersequence of the prefixes seq1[0:i] and seq2[0:j].
+
+2. **Formulate the recurrence relation**: 
+   - If seq1[i] == seq2[j], then dp[i][j] = 1 + dp[i-1][j-1] because we can include the matching character once and continue to find the shortest supersequence for the remaining prefixes.
+   - If seq1[i] != seq2[j], then dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1]) because we have two options: either include seq1[i] or seq2[j] in the supersequence, and we choose the one which results in the shorter supersequence.
+
+3. **Bottom-up computation**: 
+   - We fill in the dp table iteratively, starting from smaller subproblems and building up to larger ones.
+   - We initialize the base cases where one of the sequences is empty: dp[i][0] = i and dp[0][j] = j for all i and j.
+   - Then, we iterate over the lengths of prefixes of both sequences and compute the values of dp[i][j] according to the recurrence relation.
+
+4. **Extract the solution**: 
+   - Once the table is filled, we backtrack through it to construct the shortest common supersequence.
+   - Starting from dp[m][n], where m and n are the lengths of the input sequences, we traverse the table backwards, choosing the direction based on whether the characters match or not.
+   - We add the characters to the supersequence until we reach dp[0][0], which represents the length of the SCS of the entire sequences.
+
+### BackTrack Supersequence
+To backtrack in the dynamic programming table and extract the shortest common supersequence (SCS), you need to start from the bottom-right corner of the table (i.e., dp[m][n], where m and n are the lengths of the input sequences) and move towards the top-left corner (i.e., dp[0][0]). Here's how you can do it:
+
+1. Initialize two pointers, `i` and `j`, to `m` and `n` respectively, where `m` and `n` are the lengths of the input sequences.
+2. While `i` is greater than 0 and `j` is greater than 0, do the following:
+   - If `seq1[i-1] == seq2[j-1]`, it means the character at index `i-1` in `seq1` is part of the shortest common supersequence. Add this character to the supersequence.
+   - Move diagonally up and to the left by decrementing both `i` and `j`.
+   - If `seq1[i-1] != seq2[j-1]`, compare `dp[i-1][j]` and `dp[i][j-1]`.
+     - If `dp[i-1][j] < dp[i][j-1]`, it means the character at index `i-1` in `seq1` is part of the shortest common supersequence. Move up by decrementing `i`.
+     - If `dp[i-1][j] >= dp[i][j-1]`, it means the character at index `j-1` in `seq2` is part of the shortest common supersequence. Move left by decrementing `j`.
+3. If `i` is greater than 0, add the remaining characters of `seq1` to the supersequence.
+4. If `j` is greater than 0, add the remaining characters of `seq2` to the supersequence.
+5. Reverse the supersequence obtained to get the correct order of characters.

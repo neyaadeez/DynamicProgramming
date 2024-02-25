@@ -3,6 +3,67 @@ import java.util.List;
 import java.util.Scanner;
 public class Scs {
     int iterations = 0;
+    public String backTrace(String x, String y, int[][] scs){
+        String scsString = "";
+        int i = x.length();
+        int j = y.length();
+        while (i>0 && j>0) {
+            if(x.charAt(i-1) == y.charAt(j-1)){
+                scsString = x.charAt(i-1) + scsString;
+                i--;
+                j--;
+            }
+            else{
+                if(scs[i-1][j] < scs[i][j-1]){
+                    scsString = x.charAt(i-1) + scsString;
+                    i--;
+                }
+                else{
+                    scsString = y.charAt(j-1) + scsString;
+                    j--;
+                }
+            }
+        }
+
+        while (i > 0) {
+            scsString = x.charAt(i-1) + scsString;
+            i--;
+        }
+        while (j > 0) {
+            scsString = y.charAt(j-1) + scsString;
+            j--;
+        }
+
+        return scsString;
+    }
+
+    public String bottomUpApproach(String x, String y){
+        iterations = 0;
+        int[][] scs = new int[x.length()+1][y.length()+1];
+        for(int i=0; i<=x.length(); i++){
+            iterations++;
+            scs[i][0] = i;
+        }
+        for(int j=0; j<=y.length(); j++){
+            iterations++;
+            scs[0][j] = j;
+        }
+        for(int i=1; i<=x.length(); i++){
+            for(int j=1; j<=y.length(); j++){
+                iterations++;
+                if(x.charAt(i-1) == y.charAt(j-1)){
+                    scs[i][j] = scs[i-1][j-1] +1;
+                }
+                else{
+                    scs[i][j] = Math.min(scs[i-1][j], scs[i][j-1]) +1;
+                }
+            }
+        }
+
+                //SCS String TraceBack
+        return backTrace(x, y, scs);
+    }
+
     public boolean checkSeq(String x, String superSeq){
         int index = 0;
         for(int i = 0; i<superSeq.length(); i++){
@@ -15,6 +76,7 @@ public class Scs {
     }
 
     public void generateSuperSeq(String x, String y, String superSeq, List<String> tempSuper) {
+        iterations++;
         if (x.length() == 0) {
             tempSuper.add(superSeq + y);
             return;
@@ -71,11 +133,11 @@ public class Scs {
                 System.out.println("Iterations: "+ scs.iterations);
                 break;
             case 2:
-                // answer = scs.bottomUpApproach(str1, str2);
-                // System.out.println("Botton-Up Approach Answer: "+ answer);
-                // System.out.println("scs Length: "+ answer.length());
-                // System.out.println("Iterations: "+ scs.iterations);
-                // break;
+                answer = scs.bottomUpApproach(str1, str2);
+                System.out.println("Botton-Up Approach Answer: "+ answer);
+                System.out.println("scs Length: "+ answer.length());
+                System.out.println("Iterations: "+ scs.iterations);
+                break;
             default:
                 System.out.println("Wrong Choice.");
         }
