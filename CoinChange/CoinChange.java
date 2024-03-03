@@ -3,6 +3,26 @@ import java.util.Scanner;
 public class CoinChange {
     int ways = 0;
 
+    public int bottomUpApproach(int[] coins, int amount){
+        int[] dp = new int[amount+1];
+        dp[0] = 0;
+        for(int i=1; i<= amount; i++){
+            dp[i] = Integer.MAX_VALUE;
+        }
+        for(int i=1; i<=amount; i++){
+            for (int j : coins) {
+                if(i-j >= 0){
+                    dp[i] = Math.min(dp[i], dp[i - j] != Integer.MAX_VALUE ? dp[i - j] + 1: Integer.MAX_VALUE);
+                }
+            }
+        }
+        
+        if(dp[amount] != Integer.MAX_VALUE) 
+            return dp[amount]; 
+        else 
+            return -1;
+    }
+
     public int noWays(int[] coins, int n, int amount){
         if(amount == 0){
             return 1;
@@ -62,10 +82,9 @@ public class CoinChange {
                 System.out.println("Number of Ways: "+ cc.noWays(coins, n, amount));
                 break;
             case 2:
-                // answer = cc.bottomUpApproach(coins, amount);
-                // System.out.println("Botton-Up Approach Answer: "+ answer);
-                // System.out.println("Iterations: "+ cc.iterations);
-                // break;
+                answer = cc.bottomUpApproach(coins, amount);
+                System.out.println("Botton-Up Approach Answer: "+ answer);
+                break;
             default:
                 System.out.println("Wrong Choice.");
         }

@@ -48,5 +48,18 @@ The coin change problem is a classic algorithmic problem often solved using dyna
 2. **Define the DFS function**: Create a recursive function that explores all possible combinations of coins to reach the target amount.
 3. **Base case**: Define the base case for the recursion. This is when the target amount becomes 0, meaning we have found a valid combination of coins.
 4. **Recursive step**: In each recursive call, try using each coin denomination available. Recur with the updated target amount and keep track of the number of ways found.
-5. **Backtracking**: Undo the changes made during the recursive step to explore other possibilities.
+
+## Approach 2: Bottom-Up Dynamic Programming
+
+### Steps:
+1. **Define the subproblem**:
+    - In this approach, we define the subproblem as finding the minimum number of coins needed to make each amount from 0 to the target amount.
+
+2. **Formulate the recurrence relation**:
+    - We initialize an array `dp` of size `amount + 1` to store the minimum number of coins needed for each amount.
+    - The base case is `dp[0] = 0`, as zero coins are needed to make zero amount.
+    - For each amount `i` from 1 to the target amount, we iterate through each coin denomination `j` and update `dp[i]` to the minimum of its current value and `dp[i - j] + 1`, where `dp[i - j]` represents the minimum number of coins needed for the remaining amount after using coin `j`.
+
+3. **Bottom-up computation**:
+    - We compute the minimum number of coins needed for each amount from 1 to the target amount, iteratively building up the solution until we reach the target amount.
 
